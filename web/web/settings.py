@@ -18,7 +18,16 @@ pymysql.install_as_MySQLdb()
 
 
 SECRET_KEY = config('SECRET_KEY')
-DATABASES = config('DATABASES')
+DATABASES = {
+    'default': {
+        'ENGINE': config('ENGINE'),
+        'NAME': config('NAME'),
+        'USER': config('USER'),
+        'PASSWORD': config('PASSWORD'),
+        'HOST': config('HOST'),
+        'PORT': config('PORT'),
+    }
+}
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
