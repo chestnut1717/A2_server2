@@ -55,14 +55,14 @@ class AddrPostGetAPI(APIView):
     def post(self, request):
         username = request.data.get('username', '')
         province = request.data.get('province', '')
-        city = request.data.get('city', '')
+        district = request.data.get('district','')
         dong = request.data.get('dong', '')
         content = request.data.get('content', '')
         input_addr = request.data.get('addr', '')
 
         user = User.objects.get(email=username)
 
-        existing_address_result = AddressResult.objects.filter(province_name=province, city_name=city, dong=dong)
+        existing_address_result = AddressResult.objects.filter(province_name=province, city_name=district, dong=dong)
 
         if existing_address_result.exists():
             # 이미 해당 province, city, dong 값이 있는 경우
