@@ -15,6 +15,7 @@ from django.utils.decorators import method_decorator
 from facilities.models import *
 from django.db import models
 from django.db.models import Count
+from rest_framework.authentication import TokenAuthentication
 
 # 로그인
 @method_decorator(ensure_csrf_cookie, name='dispatch')
@@ -52,6 +53,7 @@ class logout(APIView):
 
 # 리뷰 작성
 class AddrPostGetAPI(APIView):
+    authentication_classes = [TokenAuthentication]
     def post(self, request):
         username = request.data.get('username', '')
         province = request.data.get('province', '')
@@ -80,13 +82,13 @@ class AddrPostGetAPI(APIView):
             serializer = CommentGetPostSerializer(all_comment, many=True)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         else:
-            address = Address.objects.filter(city=province, district=city, dong=dong)
+            address = Address.objects.filter(city=province, district=district, dong=dong)
 
             if address.exists():
                 address_result = AddressResult.objects.create(
                     addr_code=address.first().code,
                     province_name=province,
-                    city_name=city,
+                    city_name=district,
                     dong=dong,
                 )
 
