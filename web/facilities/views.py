@@ -26,7 +26,7 @@ class InfoAPI(APIView):
         radius = request.data.get('radius', '')
 
         # Flask 서버
-        flask_server_url = '3.37.107.63'
+        flask_server_url = 'http://3.37.107.63/db_check'
 
     
         params = {
@@ -112,7 +112,7 @@ class extraInfo(APIView):
         lat_2 = request.data.get('lat_2', '')
         lon_2 = request.data.get('lon_2', '')
     
-        flask_server_url = 'http://127.0.0.1:5000//db_check_two'
+        flask_server_url = 'http://3.37.107.63/db_check_two'
 
         params = {
             "facilities_type":facilities_type,
