@@ -36,7 +36,7 @@ class InfoAPI(APIView):
             "radius": radius,
 
         }
-        
+        print(params)
         # Flask 서버에 입력받은 데이터 전송
         response = requests.get(flask_server_url, params)
 
