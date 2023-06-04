@@ -20,10 +20,10 @@ class InfoAPI(APIView):
     # permission_classes = [IsAuthenticated]
     def post(self, request):
         # 사용자 입력 받기
-        facilities_type = request.data.get('facilities_type', '')
-        lat = request.data.get('lat', '')
-        lon = request.data.get('lon', '')
-        radius = request.data.get('radius', '')
+        facilities_type = request.data.get('facilities_type')
+        lat = request.data.get('lat')
+        lon = request.data.get('lon')
+        radius = request.data.get('radius')
 
         # Flask 서버
         flask_server_url = 'http://3.37.107.63/db_check'
