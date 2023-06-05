@@ -16,9 +16,11 @@ class SignupSerializer(serializers.ModelSerializer):
 
 # 댓글 작성 및 조회
 class CommentGetPostSerializer(serializers.ModelSerializer):
+    email = serializers.CharField(source='user.email', read_only=True)
+    
     class Meta:
         model = Comment
-        fields = ['username_comment', 'content','created_at']
+        fields = ['email','username_comment','content','created_at']
         read_only_fields = ['id']
 
 # 내가 작성한 목록 모아보기
