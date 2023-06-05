@@ -62,7 +62,7 @@ class AddrPostGetAPI(APIView):
         content = request.data.get('content', '')
         input_addr = request.data.get('addr', '')
 
-        user = User.objects.get(email=username)
+        user= User.objects.get(email=username)
 
         existing_address_result = AddressResult.objects.filter(province_name=province, city_name=district, dong=dong)
 
@@ -71,7 +71,8 @@ class AddrPostGetAPI(APIView):
             address_result = existing_address_result.first()
 
             comment = Comment.objects.create(
-                username_comment=user,
+                user = user,
+                username_comment=user.username,
                 addr_id=address_result,
                 content=content,
                 input_addr=input_addr,
@@ -93,7 +94,8 @@ class AddrPostGetAPI(APIView):
                 )
 
                 comment = Comment.objects.create(
-                    username_comment=user,
+                    user = user,
+                    username_comment=user.username,
                     addr_id=address_result,
                     content=content,
                     input_addr=input_addr,
@@ -130,9 +132,10 @@ class mycommentAPI(APIView):
     def post(self, request):
         username = request.data.get('username', '')
         user = User.objects.get(email=username)
-        my_comments = Comment.objects.filter(username_comment = user)
+        my_comments = Comment.objects.filter(username_comment = user.username)
         serializer = MyCommentSerializer(my_comments, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
+    
 
 
 
